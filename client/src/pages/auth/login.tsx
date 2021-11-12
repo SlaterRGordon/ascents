@@ -36,7 +36,7 @@ const LoginPage = (props: Props) => {
                     </Typography>
                 </div>
                 <TextField id="email" label="Email" className='textField' />
-                <TextField id="password" label="Password" type="password"  color='secondary' />
+                <TextField id="password" label="Password" type="password" color='secondary' />
                 <FormGroup>
                     <FormControlLabel control={<Checkbox defaultChecked className='primaryColor' />} label="Remember Me" />
                 </FormGroup>
