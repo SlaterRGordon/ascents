@@ -1,4 +1,5 @@
 import './baseLayout.css';
+import Navbar from '../components/navbar';
 
 interface Props {
 
@@ -6,13 +7,9 @@ interface Props {
 
 const BaseLayout = (props: Props) =>{
 
-    const {
-
-    } = props;
-
     return (
         <div className='baseLayout'>
-
+            <Navbar title='Ascents' />
         </div>
     )
 };

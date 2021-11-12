@@ -6,3 +6,8 @@
     --color-dark: #212121;
     --color-error: #CF6679;
 }
+
+html, body, body > div {
+    height: 100%;
+    margin: 0px;
+}
