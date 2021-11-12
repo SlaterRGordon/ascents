@@ -6,8 +6,10 @@ interface Props {
 
 const HomePage = (props: Props) => {
 
+    var component = <div>TEST</div>;
+
 	return (
-		<BaseLayout />
+		<BaseLayout component={component} />
 	);
 };
 

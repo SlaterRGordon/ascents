@@ -1,16 +1,26 @@
 import './baseLayout.css';
 import Navbar from '../components/navbar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
 
 interface Props {
-
+    component: any;
 }
 
-const BaseLayout = (props: Props) =>{
+const BaseLayout = (props: Props) => {
+
+    const {
+        component
+    } = props;
 
     return (
-        <div className='baseLayout'>
+        <>
             <Navbar title='Ascents' />
-        </div>
+            <Toolbar /> 
+            <Container className='flex-center'>
+                {component}
+            </Container>
+        </>
     )
 };
 

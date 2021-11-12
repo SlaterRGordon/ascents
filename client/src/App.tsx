@@ -6,14 +6,15 @@ import RegisterPage from './pages/auth/register';
 
 
 function App() {
+
 	return (
-		<Router basename='/'>
-			<Routes>
-				<Route path='/' element={<HomePage />}></Route>
-				<Route path='/login' element={<LoginPage />}></Route>
-				<Route path='/register' element={<RegisterPage />}></Route>
-			</Routes>
-		</Router>
+        <Router basename='/'>
+            <Routes>
+                <Route path='/' element={<HomePage />}></Route>
+                <Route path='/login' element={<LoginPage />}></Route>
+                <Route path='/register' element={<RegisterPage />}></Route>
+            </Routes>
+        </Router>
 	);
 }
 
