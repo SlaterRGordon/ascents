@@ -15,7 +15,7 @@ const BaseLayout = (props: Props) => {
 
     return (
         <>
-            <Navbar title='Ascents' />
+            <Navbar />
             <Toolbar /> 
             <Container className='flex-center'>
                 {component}

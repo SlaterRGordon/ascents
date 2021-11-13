@@ -1,3 +1,10 @@
+
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { login } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
+import { ILoginModal, ITarget, IAuthReduxProps } from '../../types/interfaces';
+
 import BaseLayout from '../../components/baseLayout';
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
@@ -7,16 +14,48 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
 import GoogleIcon from '@mui/icons-material/Google';
 import AppleIcon from '@mui/icons-material/Apple';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 
-interface Props {
+const LoginPage = ({
+    isAuthenticated,
+    error,
+    login,
+    clearErrors
+  }: ILoginModal) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [msg, setMsg] = useState(null);
 
-}
+    const handleChangeEmail = (e: ITarget) => setEmail(e.target.value);
+    const handleChangePassword = (e: ITarget) => setPassword(e.target.value);
 
-const LoginPage = (props: Props) => {
+    const handleOnSubmit = (e: any) => {
+        e.preventDefault();
+
+        // Create user object
+        const user = {
+            email,
+            password
+        };
+        
+        console.log(error);
+
+        // Attempt to login
+        login(user);
+    };
+
+    useEffect(() => {
+        // Check for login error
+        if (error.id === 'LOGIN_FAIL') {
+            setMsg(error.msg.msg);
+        } else {
+            setMsg(null);
+        }
+    }, [error, isAuthenticated]);
 
     const navigate = useNavigate(); 
 
@@ -25,39 +64,42 @@ const LoginPage = (props: Props) => {
     }
 
 	var component = 
-        <Box component='div' sx={{width: '330px', padding: '50px', textAlign: 'left'}}>
-            <Stack spacing={2}>
-                <div>
-                    <Typography  variant="h4" component="div">
+        <form onSubmit={handleOnSubmit}>
+            <Box component='div' sx={{width: '330px', padding: '50px', textAlign: 'left'}}>
+            {msg ? <Alert severity="error">{msg}</Alert> : null}
+                <Stack spacing={2}>
+                    <div>
+                        <Typography  variant="h4" component="div">
+                            Sign in
+                        </Typography>
+                        <Typography sx={{color: 'var(--color-fadedtext)'}} component="div">
+                            or <Link href='' onClick={() => routeChange('/register')} underline="none">create an account</Link>
+                        </Typography>
+                    </div>
+                    <TextField id="email" label="Email" className='textField' onChange={(e) => handleChangeEmail(e)} />
+                    <TextField id="password" label="Password" type="password" color='secondary' onChange={(e) => handleChangePassword(e)} />
+                    <FormGroup>
+                        <FormControlLabel control={<Checkbox defaultChecked className='primaryColor' />} label="Remember Me" />
+                    </FormGroup>
+                    <Button variant="contained" className='primary button' type="submit">
                         Sign in
-                    </Typography>
+                    </Button>
+                    <Divider sx={{borderColor: 'var(--color-text)'}}></Divider>
+                    <Button variant="outlined" startIcon={<GoogleIcon />} className='secondary button'>
+                        Sign in with Google
+                    </Button>
+                    <Button variant="outlined" startIcon={<AppleIcon />} className='secondary button'>
+                        Sign in with Apple
+                    </Button>
+                    <Button variant="outlined" startIcon={<FacebookIcon />} className='secondary button'>
+                        Sign in with Facebook
+                    </Button>
                     <Typography sx={{color: 'var(--color-fadedtext)'}} component="div">
-                        or <Link href='' onClick={() => routeChange('/register')} underline="none">create an account</Link>
+                        <Link href='' underline="none">Forgot your password?</Link>
                     </Typography>
-                </div>
-                <TextField id="email" label="Email" className='textField' />
-                <TextField id="password" label="Password" type="password" color='secondary' />
-                <FormGroup>
-                    <FormControlLabel control={<Checkbox defaultChecked className='primaryColor' />} label="Remember Me" />
-                </FormGroup>
-                <Button variant="contained" className='primary button'>
-                    Sign in
-                </Button>
-                <Divider sx={{borderColor: 'var(--color-text)'}}></Divider>
-                <Button variant="outlined" startIcon={<GoogleIcon />} className='secondary button'>
-                    Sign in with Google
-                </Button>
-                <Button variant="outlined" startIcon={<AppleIcon />} className='secondary button'>
-                    Sign in with Apple
-                </Button>
-                <Button variant="outlined" startIcon={<FacebookIcon />} className='secondary button'>
-                    Sign in with Facebook
-                </Button>
-                <Typography sx={{color: 'var(--color-fadedtext)'}} component="div">
-                    <Link href='' underline="none">Forgot your password?</Link>
-                </Typography>
-            </Stack>
-        </Box>
+                </Stack>
+            </Box>
+        </form>
     ;
 
 	return (
@@ -65,4 +107,11 @@ const LoginPage = (props: Props) => {
 	);
 };
 
-export default LoginPage;
+const mapStateToProps = (state: IAuthReduxProps) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.error
+});
+
+export default connect(mapStateToProps, { login, clearErrors })(
+    LoginPage
+);

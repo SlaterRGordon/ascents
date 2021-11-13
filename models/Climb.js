@@ -13,4 +13,6 @@ const ClimbSchema = new Schema({
 	}
 });
 
-module.exports = Climb = mongoose.model('Climb', ClimbSchema);
+const Climb = mongoose.model('Climb', ClimbSchema);
+
+export default Climb;

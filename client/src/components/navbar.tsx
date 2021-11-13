@@ -5,16 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { IAppNavbar, IAuthReduxProps } from '../types/interfaces';
+import { connect } from 'react-redux';
 
-interface Props {
-	title: string;
-}
-
-const Navbar = (props: Props) =>{
-
-    const {
-		title
-    } = props;
+const Navbar = ({ auth }: IAppNavbar) =>{
 
     const navigate = useNavigate(); 
 
@@ -26,15 +20,25 @@ const Navbar = (props: Props) =>{
         <AppBar className='navbar' position='fixed'>
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    {title}
+                    ASCENTS
                 </Typography>
-                <Stack direction="row" spacing={1}>
-                    <Button variant='contained' className='primary button' onClick={() => routeChange('/login')}>Login</Button>
-                    <Button variant='contained' className='primary button' onClick={() => routeChange('/register')}>Register</Button>
-                </Stack>
+                {auth?.isAuthenticated ? 
+                    <Stack direction="row" spacing={1}>
+                        <Button variant='contained' className='primary button' onClick={() => routeChange('/logout')}>Logout</Button>
+                    </Stack>
+                :
+                    <Stack direction="row" spacing={1}>
+                        <Button variant='contained' className='primary button' onClick={() => routeChange('/login')}>Login</Button>
+                        <Button variant='contained' className='primary button' onClick={() => routeChange('/register')}>Register</Button>
+                    </Stack>
+                }
             </Toolbar>
         </AppBar>
     )
 };
 
-export default Navbar;
+const mapStateToProps = (state: IAuthReduxProps) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(Navbar);
