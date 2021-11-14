@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { IAppNavbar, IAuthReduxProps } from '../types/interfaces';
 import { connect } from 'react-redux';
+import Logout from '../pages/auth/logout';
 
 const Navbar = ({ auth }: IAppNavbar) =>{
 
@@ -24,7 +25,7 @@ const Navbar = ({ auth }: IAppNavbar) =>{
                 </Typography>
                 {auth?.isAuthenticated ? 
                     <Stack direction="row" spacing={1}>
-                        <Button variant='contained' className='primary button' onClick={() => routeChange('/logout')}>Logout</Button>
+                        <Logout />
                     </Stack>
                 :
                     <Stack direction="row" spacing={1}>
