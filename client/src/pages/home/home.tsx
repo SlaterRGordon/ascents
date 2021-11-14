@@ -1,10 +1,25 @@
 import BaseLayout from '../../components/baseLayout';
+import { useEffect } from 'react';
+import { IAuthReduxProps } from '../../types/interfaces';
+import { useNavigate } from 'react-router';
+import { connect } from 'react-redux';
 
-interface Props {
+const HomePage = ({
+    auth,
+    error, 
+}: IAuthReduxProps) => {
+    const navigate = useNavigate(); 
 
-}
+    const routeChange = (path: string) => {
+        navigate(path);
+    }
 
-const HomePage = (props: Props) => {
+    useEffect(() => {
+            console.log(auth);
+            if(!auth.isAuthenticated) {
+                routeChange('/login');
+            }
+    }, [error, auth]);
 
     var component = <div>TEST</div>;
 
@@ -13,4 +28,11 @@ const HomePage = (props: Props) => {
 	);
 };
 
-export default HomePage;
+const mapStateToProps = (state: IAuthReduxProps) => ({
+    auth: state.auth,
+    error: state.error
+});
+
+export default connect(mapStateToProps)(
+    HomePage
+);

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
@@ -26,6 +26,7 @@ const LoginPage = ({
     login,
     clearErrors
   }: ILoginModal) => {
+    const [auth, setAuth] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState(null);
@@ -55,12 +56,25 @@ const LoginPage = ({
         } else {
             setMsg(null);
         }
+
+        const asyncCallback = async () =>{
+            if(isAuthenticated) {
+                setAuth(true);
+            }
+        }
+
+        asyncCallback();
+        
     }, [error, isAuthenticated]);
 
     const navigate = useNavigate(); 
 
     const routeChange = (path: string) => {
         navigate(path);
+    }
+
+    if(auth) {
+        routeChange('/')
     }
 
 	var component = 

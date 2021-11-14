@@ -8,7 +8,19 @@ import store from './store';
 import { Provider } from 'react-redux';
 import { useEffect } from 'react';
 import { loadUser } from './actions/authActions';
+import { Navigate } from 'react-router';
 
+function PrivateRoute(element) {
+    console.log(store.getState());
+    const isAuthenticated = store.getState().auth.isAuthenticated;
+    console.log(isAuthenticated);
+    return (
+        isAuthenticated ? 
+        element
+        : 
+        <Navigate to="/login" />
+    )
+}
 
 function App() {
     useEffect(() => {
@@ -19,7 +31,7 @@ function App() {
         <Provider store={store}>
             <Router basename='/'>
                 <Routes>
-                    <Route path='/' element={<HomePage />}></Route>
+                    <Route path='/' element={PrivateRoute(<HomePage />)}></Route>
                     <Route path='/login' element={<LoginPage />}></Route>
                     <Route path='/register' element={<RegisterPage />}></Route>
                 </Routes>
