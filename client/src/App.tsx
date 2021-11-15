@@ -4,10 +4,10 @@ import HomePage from './pages/home/home';
 import LoginPage from './pages/auth/login';
 import RegisterPage from './pages/auth/register';
 
-import store from './store';
+import store from './flux/store';
 import { Provider } from 'react-redux';
 import { useEffect } from 'react';
-import { loadUser } from './actions/authActions';
+import { loadUser } from './flux/actions/authActions';
 
 
 function App() {

@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { IAppNavbar, IAuthReduxProps } from '../types/interfaces';
+import { IAppNavbar, IAuthReduxProps } from '../flux/types/interfaces';
 import { connect } from 'react-redux';
 
 const Navbar = ({ auth }: IAppNavbar) =>{

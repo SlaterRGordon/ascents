@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
-import { ILoginModal, ITarget, IAuthReduxProps } from '../../types/interfaces';
+import { login } from '../../flux/actions/authActions';
+import { clearErrors } from '../../flux/actions/errorActions';
+import { ILoginModal, ITarget, IAuthReduxProps } from '../../flux/types/interfaces';
 
 import BaseLayout from '../../components/baseLayout';
 import { useNavigate } from "react-router-dom";
