@@ -1,30 +1,32 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/home/home';
-import LoginPage from './pages/auth/login';
-import RegisterPage from './pages/auth/register';
-
-import store from './flux/store';
-import { Provider } from 'react-redux';
-import { useEffect } from 'react';
-import { loadUser } from './flux/actions/authActions';
+import { Navigate } from 'react-router';
+import { Toolbar, Container } from '@mui/material';
+import Navbar from './components/navbar/navbar';
+import LoginPage from './components/auth/login/login';
+import RegisterPage from './components/auth/register/register';
 
 function App() {
-    useEffect(() => {
-        store.dispatch(loadUser());
-    }, []);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
-	return (
-        <Provider store={store}>
-            <Router basename='/'>
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('profile')));
+    });
+
+    return (
+        <Router basename='/'>
+            <Navbar />
+            <Toolbar />
+            <Container className='flex-center'>
                 <Routes>
-                    <Route path='/' element={<HomePage />}></Route>
-                    <Route path='/login' element={<LoginPage />}></Route>
-                    <Route path='/register' element={<RegisterPage />}></Route>
+                    <Route path='/' element={<div>Tester</div>}></Route>
+                    <Route path='/login' element={(!user ? <LoginPage /> : <Navigate to='/' />)}></Route>
+                    <Route path='/register' element={(!user ? <RegisterPage /> : <Navigate to='/' />)}></Route>
                 </Routes>
-            </Router>
-        </Provider>
-	);
+            </Container>
+        </Router>
+    );
 }
 
 export default App;
