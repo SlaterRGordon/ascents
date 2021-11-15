@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/authActions';
-import { ILogoutProps } from '../../types/interfaces';
+import { logout } from '../../flux/actions/authActions';
+import { ILogoutProps } from '../../flux/types/interfaces';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
-import store from '../../store';
+import store from '../../flux/store';
 export const Logout = ({ logout }: ILogoutProps) => {
 
     const navigate = useNavigate(); 

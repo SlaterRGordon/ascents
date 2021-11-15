@@ -7,6 +7,7 @@ import {
     ITarget,
     IAuthReduxProps
 } from '../../flux/types/interfaces';
+import { useNavigate } from 'react-router';
 
 import BaseLayout from '../../components/baseLayout';
 import Box from '@mui/material/Box';
@@ -59,6 +60,16 @@ const RegisterPage = ({
         }
 
     }, [error, isAuthenticated]);
+
+    const navigate = useNavigate(); 
+
+    const routeChange = (path: string) => {
+        navigate(path);
+    }
+
+    if(isAuthenticated) {
+        routeChange('/');
+    }
 
 	var component = 
         <form onSubmit={handleOnSubmit}>

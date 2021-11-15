@@ -11,7 +11,6 @@ import {
     REGISTER_FAIL
 } from './types';
 import { IAuthFunction, IConfigHeaders } from '../types/interfaces';
-import { useNavigate } from "react-router-dom";
 
 // Check token & load user
 export const loadUser = () => (dispatch: Function, getState: Function) => {
@@ -20,11 +19,12 @@ export const loadUser = () => (dispatch: Function, getState: Function) => {
 
     axios
         .get('/api/auth/user', tokenConfig(getState))
-        .then(res =>
-            dispatch({
-                type: USER_LOADED,
-                payload: res.data
-            })
+        .then(res => {
+                dispatch({
+                    type: USER_LOADED,
+                    payload: res.data
+                })
+            }
         )
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status));

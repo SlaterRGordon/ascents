@@ -26,7 +26,6 @@ const LoginPage = ({
     login,
     clearErrors
   }: ILoginModal) => {
-    const [auth, setAuth] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState(null);
@@ -56,15 +55,6 @@ const LoginPage = ({
         } else {
             setMsg(null);
         }
-
-        const asyncCallback = async () =>{
-            if(isAuthenticated) {
-                setAuth(true);
-            }
-        }
-
-        asyncCallback();
-        
     }, [error, isAuthenticated]);
 
     const navigate = useNavigate(); 
@@ -73,8 +63,8 @@ const LoginPage = ({
         navigate(path);
     }
 
-    if(auth) {
-        routeChange('/')
+    if(isAuthenticated) {
+        routeChange('/');
     }
 
 	var component = 
