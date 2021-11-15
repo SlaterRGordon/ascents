@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from 'react-google-login';
 import * as actionType from '../../../flux/types/types';
-import { login } from '../../../flux/actions/auth';
+import { login, loginGoogle } from '../../../flux/actions/auth';
 
 import {
     Box, Stack, Divider, Typography, TextField, Button, Link,
@@ -44,7 +44,7 @@ const LoginPage = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: actionType.LOGIN_SUCCESS, data: { result, token } });
+            dispatch(loginGoogle({ result, token }));
             navigate('/');
         } catch (error) {
             console.log(error);
