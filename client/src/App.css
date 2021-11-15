@@ -1,0 +1,78 @@
+:root {
+    --color-text: #FFFFFF;
+    --color-fadedtext: #a3a0a0;
+    --color-back: #303030;
+	--color-front: #424242;
+    --color-dark: #212121;
+    --color-error: #CF6679;
+    --color-primary: #f59f21;
+}
+
+html, body, body > div {
+    height: 100%;
+    margin: 0px;
+	background-color: var(--color-front);
+    color: var(--color-text);
+}
+
+.flex-center {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+}
+
+.primary {
+    color: var(--color-text) !important;
+    background-color: var(--color-primary) !important;
+}
+
+.primaryColor {
+    color: var(--color-primary) !important;
+}
+
+.secondary {
+    color: var(--color-text) !important;
+    border: 1px solid var(--color-text) !important;
+}
+
+.button {
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
+
+label.Mui-focused {
+    color: var(--color-text) !important;
+}
+.MuiInput-underline:after {
+    border-bottom-color: var(--color-text) !important;
+}
+.MuiOutlinedInput-root > fieldset {
+    border-color: var(--color-text) !important;   
+}
+.MuiOutlinedInput-root > input {
+    color: var(--color-text) !important;   
+}
+.MuiInputLabel-root {
+    color: var(--color-text) !important;   
+}
+.MuiOutlinedInput-root > fieldset:hover {
+    border-color: var(--color-text) !important;
+}
+.MuiOutlinedInput-root > .Mui-focused > fieldset {
+    border-color: var(--color-text) !important;
+}
+.MuiButton-startIcon {
+    margin-right: 8px !important;
+    margin-left: 8px !important;
+    left: 0px !important;
+    position: absolute !important;
+}
+input:-webkit-autofill {
+    -webkit-transition-delay: 9999999s;
+}
+
+form {
+    display: flex;
+}
