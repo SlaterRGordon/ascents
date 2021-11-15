@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { register } from '../../flux/actions/authActions';
 import { clearErrors } from '../../flux/actions/errorActions';
