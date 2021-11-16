@@ -1,6 +1,6 @@
 import './climbs.css';
 import {
-    Grid, CircularProgress, Paper
+    Grid, LinearProgress, Paper
 } from '@mui/material';
 import Climb from './climb/climb';
 import Paginate from '../pagination/pagination';
@@ -21,7 +21,7 @@ const Climbs = () => {
 
     return (
         <>
-            {isLoading ? <CircularProgress /> : (
+            {isLoading ? <LinearProgress sx={{marginTop: '-24px', width: '100vw', position: 'absolute', left: '0px', display: 'flex', flexGrow: 1}} /> : (
             <Grid container alignItems={'stretch'} spacing={3} className={'climbs'}>
                 {climbs?.map((climb) => (
                     <Grid key={climb._id} item xs={12} sm={12} md={6} lg={3}>

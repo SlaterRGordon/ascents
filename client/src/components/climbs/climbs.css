@@ -1,7 +1,11 @@
 .paginate {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    left: 24px;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
 }
 
 .climbs {
