@@ -50,10 +50,9 @@ export const register = async (req, res) => {
 
         const hash = await bcrypt.hash(password, salt);
         if (!hash) throw Error('Something went wrong hashing the password');
-        console.log(hash);
-        const result = await User.create({ username, email, password: hash });
-        if (!result) throw Error('Something went wrong creating the user');
-        console.log(result);
+
+        const user = await User.create({ username, email, password: hash });
+        if (!user) throw Error('Something went wrong creating the user');
 
         const token = jwt.sign({ email: user.email, id: user._id }, JWT_SECRET, { expiresIn: 3600 });
 
@@ -66,6 +65,31 @@ export const register = async (req, res) => {
             }
         });
     } catch (err) {
+        res.status(400).json({ msg: err.message });
+    }
+};
+
+export const loginGoogle = async (req, res) => {
+    const { result, token } = req.body;
+
+    try {
+        const user = await User.findOne({ email: result.email });
+        if (!user) {
+            user = await User.create({ username: result.googleId, email: result.email });
+        };
+
+        const token = jwt.sign({ email: user.email, id: user._id }, JWT_SECRET, { expiresIn: 3600 });
+
+        res.status(200).json({
+            token,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email
+            }
+        });
+    } catch (err) {
+        console.log(err);
         res.status(400).json({ msg: err.message });
     }
 };

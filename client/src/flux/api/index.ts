@@ -10,5 +10,11 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+export const fetchClimb = (id) => API.get(`/climbs/${id}`);
+export const fetchClimbs = (page) => API.get(`/climbs?page=${page}`);
+export const createClimb = (newClimb) => API.post('/climbs', newClimb);
+export const deleteClimb = (id) => API.delete(`/climbs/${id}`);
+
 export const login = (formData) => API.post('/auth/login', formData);
 export const register = (formData) => API.post('/auth/register', formData);
+export const loginGoogle = (data) => API.post('/auth/loginGoogle', data);

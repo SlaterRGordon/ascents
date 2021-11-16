@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from 'react-google-login';
-import * as actionType from '../../../flux/types/types';
-import { register } from '../../../flux/actions/auth';
+import { register, loginGoogle } from '../../../flux/actions/auth';
 
 import {
     Box, Stack, Divider, Typography, TextField, Button
@@ -42,7 +41,7 @@ const RegisterPage = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: actionType.LOGIN_SUCCESS, data: { result, token } });
+            dispatch(loginGoogle({ result, token }));
             navigate('/');
         } catch (error) {
             console.log(error);
@@ -56,7 +55,7 @@ const RegisterPage = () => {
     const handleChangePassword = (e: ITarget) => setPassword(e.target.value);
 
     return (
-        <form onSubmit={handleOnSubmit}>
+        <form onSubmit={handleOnSubmit} className={'flex-center'}>
             <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
                 <Stack spacing={2}>
                     <Typography variant="h4" component="div">

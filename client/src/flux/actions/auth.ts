@@ -24,3 +24,15 @@ export const register = (formData) => async (dispatch) => {
         });
     }
 };
+
+export const loginGoogle = (googleData) => async (dispatch) => {
+    try {
+        const { data } = await api.loginGoogle(googleData);
+
+        dispatch({ type: actionType.LOGIN_SUCCESS, data });
+    } catch (error) {
+        dispatch({
+            type: actionType.LOGIN_FAIL
+        });
+    }
+};

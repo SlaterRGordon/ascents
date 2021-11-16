@@ -1,0 +1,13 @@
+.paginate {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.climbs {
+    margin-bottom: 24px !important;
+    display: flex !important;
+    flex-grow: 1 !important;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
