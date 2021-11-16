@@ -6,7 +6,11 @@ const ascentSchema = mongoose.Schema({
     userId: { type: String },
     description: { type: String },
     grade: { type: String },
-    quality: { type: Number }
+    quality: { type: Number },
+    date: {
+        type: Date,
+        default: new Date(),
+    }
 });
 
 export default mongoose.model("Ascent", ascentSchema);

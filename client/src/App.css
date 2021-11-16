@@ -13,12 +13,24 @@ html, body, body > div {
     margin: 0px;
 	background-color: var(--color-front);
     color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContainer {
+    padding: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    justify-content: space-between !important;
 }
 
 .flex-center {
     display: flex !important;
+    flex: 2 !important;
     flex-direction: column !important;
     align-items: center !important;
+    align-self: center !important;
     justify-content: center !important;
     justify-self: center !important;
 }

@@ -21,7 +21,6 @@ const Navbar = () => {
     useEffect(() => {
         setInterval(() => {
             setUser(JSON.parse(localStorage.getItem('profile')));
-            console.log(user);
             const token = user?.token;
 
             if (token) {

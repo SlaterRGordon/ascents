@@ -5,7 +5,11 @@ const climbSchema = mongoose.Schema({
     name: { type: String },
     grade: { type: String },
     area: { type: String },
-    description: { type: String }
+    description: { type: String },
+    date: {
+        type: Date,
+        default: new Date(),
+    }
 });
 
 export default mongoose.model("Climb", climbSchema);

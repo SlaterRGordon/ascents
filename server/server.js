@@ -4,6 +4,7 @@ import cors from 'cors';
 import config from './config/index.js';
 
 import authRouter from'./routes/auth.js';
+import climbRouter from'./routes/climbs.js';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
 app.use("/auth", authRouter);
+app.use("/climbs", climbRouter);
 
 const { MONGO_URI, MONGO_DB_NAME, PORT } = config;
 const db = `${MONGO_URI}/${MONGO_DB_NAME}`;
