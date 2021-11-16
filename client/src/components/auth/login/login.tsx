@@ -56,7 +56,7 @@ const LoginPage = () => {
     const handleChangePassword = (e: ITarget) => setPassword(e.target.value);
 
     return (
-        <form onSubmit={handleOnSubmit}>
+        <form onSubmit={handleOnSubmit} className={'flex-center'}>
             <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
                 <Stack spacing={2}>
                     <div>

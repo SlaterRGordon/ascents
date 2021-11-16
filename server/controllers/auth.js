@@ -73,7 +73,7 @@ export const loginGoogle = async (req, res) => {
     const { result, token } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: result.email });
         if (!user) {
             user = await User.create({ username: result.googleId, email: result.email });
         };
@@ -89,6 +89,7 @@ export const loginGoogle = async (req, res) => {
             }
         });
     } catch (err) {
+        console.log(err);
         res.status(400).json({ msg: err.message });
     }
 };
