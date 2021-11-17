@@ -5,6 +5,7 @@ import config from './config/index.js';
 
 import authRouter from'./routes/auth.js';
 import climbRouter from'./routes/climbs.js';
+import ascentRouter from'./routes/ascents.js';
 
 const app = express();
 

@@ -4,7 +4,7 @@ export const getClimbs = async (req, res) => {
     const { page } = req.query;
 
     try {
-        const limit = 4;
+        const limit = 12;
         const startIndex = (Number(page) - 1) * limit;
         
         const total = await Climb.countDocuments({});

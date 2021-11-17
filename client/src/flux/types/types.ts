@@ -9,9 +9,15 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_ERRORS = "GET_ERRORS"; 
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
-export const CREATE = 'CREATE';
-export const DELETE = 'DELETE';
-export const FETCH_ALL = 'FETCH_ALL';
+export const CREATE_CLIMB = 'CREATE_CLIMB';
+export const DELETE_CLIMB = 'DELETE_CLIMB';
+export const FETCH_CLIMBS = 'FETCH_CLIMBS';
 export const FETCH_CLIMB = 'FETCH_CLIMB';
+
+export const CREATE_ASCENT = 'CREATE_ASCENT';
+export const DELETE_ASCENT = 'DELETE_ASCENT';
+export const FETCH_ASCENTS = 'FETCH_ASCENTS';
+export const FETCH_ASCENT = 'FETCH_ASCENT';
+
 export const END_LOADING = 'END_LOADING';
 export const START_LOADING = 'START_LOADING';

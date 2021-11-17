@@ -6,7 +6,7 @@ const climbReducer = (state = { isLoading: true, climbs: [] }, action) => {
             return { ...state, isLoading: true };
         case 'END_LOADING':
             return { ...state, isLoading: false };
-        case actionType.FETCH_ALL:
+        case actionType.FETCH_CLIMBS:
             return {
                 ...state,
                 climbs: action.payload.data,
@@ -15,9 +15,9 @@ const climbReducer = (state = { isLoading: true, climbs: [] }, action) => {
             };
         case actionType.FETCH_CLIMB:
             return { ...state, climb: action.payload.climb };
-        case actionType.CREATE:
+        case actionType.CREATE_CLIMB:
             return { ...state, climbs: [...state.climbs, action.payload] };
-        case actionType.DELETE:
+        case actionType.DELETE_CLIMB:
             return { ...state, climbs: state.climbs.filter((climb) => climb._id !== action.payload) };
         default:
             return state;

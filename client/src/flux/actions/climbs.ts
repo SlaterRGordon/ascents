@@ -18,19 +18,19 @@ export const getClimbs = (page) => async (dispatch) => {
         dispatch({ type: actionType.START_LOADING });
         const { data: { data, currentPage, numberOfPages } } = await api.fetchClimbs(page);
 
-        dispatch({ type: actionType.FETCH_ALL, payload: { data, currentPage, numberOfPages } });
+        dispatch({ type: actionType.FETCH_CLIMBS, payload: { data, currentPage, numberOfPages } });
         dispatch({ type: actionType.END_LOADING });
     } catch (error) {
         console.log(error);
     }
 };
 
-export const createClimb = (post) => async (dispatch) => {
+export const createClimb = (climb) => async (dispatch) => {
     try {
         dispatch({ type: actionType.START_LOADING });
-        const { data } = await api.createClimb(post);
+        const { data } = await api.createClimb(climb);
 
-        dispatch({ type: actionType.CREATE, payload: data });
+        dispatch({ type: actionType.CREATE_CLIMB, payload: data });
     } catch (error) {
         console.log(error);
     }
@@ -39,7 +39,7 @@ export const createClimb = (post) => async (dispatch) => {
 export const deleteClimb = (id) => async (dispatch) => {
     try {
         await await api.deleteClimb(id);
-        dispatch({ type: actionType.DELETE, payload: id });
+        dispatch({ type: actionType.DELETE_CLIMB, payload: id });
     } catch (error) {
         console.log(error);
     }
