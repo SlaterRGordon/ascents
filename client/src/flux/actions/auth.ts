@@ -1,6 +1,18 @@
 import * as actionType from '../types/types';
 import * as api from '../api';
 
+export const loadUser = (userId) => async (dispatch) => {
+    try {
+        const { data } = await api.loadUser(userId);
+
+        dispatch({ type: actionType.USER_LOADED, data });
+    } catch (error) {
+        dispatch({
+            type: actionType.LOGIN_FAIL
+        });
+    }
+};
+
 export const login = (formData) => async (dispatch) => {
     try {
         const { data } = await api.login(formData);

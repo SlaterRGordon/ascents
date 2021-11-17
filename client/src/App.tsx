@@ -1,6 +1,8 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { loadUser } from './flux/actions/auth';
 import { Navigate } from 'react-router';
 import { Toolbar, Container } from '@mui/material';
 import Navbar from './components/navbar/navbar';
@@ -8,12 +10,17 @@ import LoginPage from './components/auth/login/login';
 import RegisterPage from './components/auth/register/register';
 import Climbs from './components/climbs/climbs';
 
+
 function App() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const { authData } = useSelector((state: RootStateOrAny) => state.auth);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('profile')));
-    });
+        const user = JSON.parse(localStorage.getItem('profile'));
+        if(user) {
+            dispatch(loadUser(JSON.parse(localStorage.getItem('profile')).user.id));
+        }
+    }, [dispatch]);
 
     return (
         <Router basename='/'>
@@ -22,8 +29,8 @@ function App() {
             <Container className="mainContainer">
                 <Routes>
                     <Route path='/' element={(<Climbs />)}></Route>
-                    <Route path='/login' element={(!user ? <LoginPage /> : <Navigate to='/' />)}></Route>
-                    <Route path='/register' element={(!user ? <RegisterPage /> : <Navigate to='/' />)}></Route>
+                    <Route path='/login' element={(!authData ? <LoginPage /> : <Navigate to='/' />)}></Route>
+                    <Route path='/register' element={(!authData ? <RegisterPage /> : <Navigate to='/' />)}></Route>
                 </Routes>
             </Container>
         </Router>

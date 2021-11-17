@@ -6,7 +6,7 @@ API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
   }
-
+  console.log(req);
   return req;
 });
 
@@ -20,6 +20,7 @@ export const fetchAscentsByUser = ({page, userId}) => API.get(`/ascents?page=${p
 export const createAscent = (newAscent) => API.post('/ascents', newAscent);
 export const deleteAscent = (id) => API.delete(`/ascents/${id}`);
 
+export const loadUser = (userId) => API.get(`/auth/loadUser?userId=${userId}`);
 export const login = (formData) => API.post('/auth/login', formData);
 export const register = (formData) => API.post('/auth/register', formData);
 export const loginGoogle = (data) => API.post('/auth/loginGoogle', data);

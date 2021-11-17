@@ -4,7 +4,6 @@ import * as api from '../api';
 export const getClimb = (id) => async (dispatch) => {
     try {
         dispatch({ type: actionType.START_LOADING });
-        console.log('getclimb');
         const { data } = await api.fetchClimb(id);
 
         dispatch({ type: actionType.FETCH_CLIMB, payload: { post: data } });

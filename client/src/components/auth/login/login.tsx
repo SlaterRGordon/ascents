@@ -20,7 +20,6 @@ interface ITarget {
 }
 
 const LoginPage = () => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
