@@ -6,7 +6,7 @@ import { GoogleLogin } from 'react-google-login';
 import { register, loginGoogle } from '../../../flux/actions/auth';
 
 import {
-    Box, Stack, Divider, Typography, TextField, Button
+    Box, Stack, Divider, Typography, TextField, Button, Paper
 } from '@mui/material';
 
 import GoogleIcon from '@mui/icons-material/Google';
@@ -56,6 +56,7 @@ const RegisterPage = () => {
 
     return (
         <form onSubmit={handleOnSubmit} className={'flex-center'}>
+            <Paper elevation={6}>
             <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
                 <Stack spacing={2}>
                     <Typography variant="h4" component="div">
@@ -81,6 +82,7 @@ const RegisterPage = () => {
                     />
                 </Stack>
             </Box>
+            </Paper>
         </form>
     );
 };

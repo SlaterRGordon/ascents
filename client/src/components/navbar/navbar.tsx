@@ -1,9 +1,10 @@
 import './navbar.css';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import * as actionType from '../../flux/types/types';
-import { AppBar, Toolbar, Typography, Stack, Button } from '@mui/material';
+import { AppBar, Toolbar, Stack, Button, Menu, MenuItem, IconButton, Avatar } from '@mui/material';
 import logo from '../../images/logotext.png';
 
 const Navbar = () => {
@@ -12,7 +13,17 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     const logout = () => {
+        handleClose();
         dispatch({ type: actionType.LOGOUT_SUCCESS });
         navigate('/login');
     };
@@ -30,13 +41,25 @@ const Navbar = () => {
                 </Link>
                 {authData ?
                     <Stack direction="row" spacing={1}>
-                        <Typography variant="h6" component="div">{authData.user.username}</Typography>
-                        <Button variant='outlined' sx={{width: '100px'}} className='secondary button' onClick={() => logout()}>Logout</Button>
+                        <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                            <Avatar sx={{ width: 32, height: 32, backgroundColor: 'var(--color-primary)' }}>S</Avatar>
+                        </IconButton>
+                        <Menu
+                            id="profileMenu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>Profile</MenuItem>
+                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                        </Menu>
+
                     </Stack>
                     :
                     <Stack direction="row" spacing={1}>
-                        <Button component={Link} to='/register' variant='text' sx={{width: '100px'}} className='textColor button'>Join now</Button>
-                        <Button component={Link} to='/login' variant='outlined' sx={{width: '100px'}} className='secondary button'>Sign in</Button>
+                        <Button component={Link} to='/register' variant='text' sx={{ width: '100px' }} className='textColor button'>Join now</Button>
+                        <Button component={Link} to='/login' variant='outlined' sx={{ width: '100px' }} className='secondary button'>Sign in</Button>
                     </Stack>
                 }
             </Toolbar>

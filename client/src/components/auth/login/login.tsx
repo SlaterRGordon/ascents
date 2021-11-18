@@ -7,9 +7,8 @@ import { login, loginGoogle } from '../../../flux/actions/auth';
 
 import {
     Box, Stack, Divider, Typography, TextField, Button, Link,
-    FormGroup, FormControlLabel, Checkbox
+    FormGroup, FormControlLabel, Checkbox, Paper
 } from '@mui/material';
-
 import GoogleIcon from '@mui/icons-material/Google';
 
 interface ITarget {
@@ -56,41 +55,43 @@ const LoginPage = () => {
 
     return (
         <form onSubmit={handleOnSubmit} className={'flex-center'}>
-            <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
-                <Stack spacing={2}>
-                    <div>
-                        <Typography variant="h4" component="div">
+            <Paper elevation={6}>
+                <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
+                    <Stack spacing={2}>
+                        <div>
+                            <Typography variant="h4" component="div">
+                                Sign in
+                            </Typography>
+                            <Typography sx={{ color: 'var(--color-fadedtext)' }} component="div">
+                                or <Link href='' onClick={() => navigate('/register')} underline="none">create an account</Link>
+                            </Typography>
+                        </div>
+                        <TextField id="email" label="Email" className='textField' onChange={(e) => handleChangeEmail(e)} />
+                        <TextField id="password" label="Password" type="password" color='secondary' onChange={(e) => handleChangePassword(e)} />
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox defaultChecked className='primaryColor' />} label="Remember Me" />
+                        </FormGroup>
+                        <Button variant="contained" className='primary button' type="submit">
                             Sign in
-                        </Typography>
+                        </Button>
+                        <Divider sx={{ borderColor: 'var(--color-fadedtext)' }}></Divider>
+                        <GoogleLogin
+                            clientId="316396612075-b5o9080lal58i8tqe7pj3sfmlvui22md.apps.googleusercontent.com"
+                            render={(renderProps) => (
+                                <Button variant="outlined" startIcon={<GoogleIcon />} className='secondary button' onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                    Sign in with Google
+                                </Button>
+                            )}
+                            onSuccess={googleSuccess}
+                            onFailure={googleError}
+                            cookiePolicy="single_host_origin"
+                        />
                         <Typography sx={{ color: 'var(--color-fadedtext)' }} component="div">
-                            or <Link href='' onClick={() => navigate('/register')} underline="none">create an account</Link>
+                            <Link href='' underline="none">Forgot your password?</Link>
                         </Typography>
-                    </div>
-                    <TextField id="email" label="Email" className='textField' onChange={(e) => handleChangeEmail(e)} />
-                    <TextField id="password" label="Password" type="password" color='secondary' onChange={(e) => handleChangePassword(e)} />
-                    <FormGroup>
-                        <FormControlLabel control={<Checkbox defaultChecked className='primaryColor' />} label="Remember Me" />
-                    </FormGroup>
-                    <Button variant="contained" className='primary button' type="submit">
-                        Sign in
-                    </Button>
-                    <Divider sx={{ borderColor: 'var(--color-fadedtext)' }}></Divider>
-                    <GoogleLogin
-                        clientId="316396612075-b5o9080lal58i8tqe7pj3sfmlvui22md.apps.googleusercontent.com"
-                        render={(renderProps) => (
-                            <Button variant="outlined" startIcon={<GoogleIcon />} className='secondary button' onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                Sign in with Google
-                            </Button>
-                        )}
-                        onSuccess={googleSuccess}
-                        onFailure={googleError}
-                        cookiePolicy="single_host_origin"
-                    />
-                    <Typography sx={{ color: 'var(--color-fadedtext)' }} component="div">
-                        <Link href='' underline="none">Forgot your password?</Link>
-                    </Typography>
-                </Stack>
-            </Box>
+                    </Stack>
+                </Box>
+            </Paper>
         </form>
     );
 };
