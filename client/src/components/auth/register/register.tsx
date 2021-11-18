@@ -67,7 +67,7 @@ const RegisterPage = () => {
                     <Button variant="contained" className='primary button' type="submit">
                         Sign up
                     </Button>
-                    <Divider sx={{ borderColor: 'var(--color-text)' }}></Divider>
+                    <Divider sx={{ borderColor: 'var(--color-fadedtext)' }}></Divider>
                     <GoogleLogin
                         clientId="316396612075-b5o9080lal58i8tqe7pj3sfmlvui22md.apps.googleusercontent.com"
                         render={(renderProps) => (
