@@ -6,6 +6,7 @@ const climbSchema = mongoose.Schema({
     grade: { type: String },
     area: { type: String },
     description: { type: String },
+    quality: { type: Number },
     date: {
         type: Date,
         default: new Date(),
