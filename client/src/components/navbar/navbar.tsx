@@ -69,7 +69,7 @@ const Navbar = () => {
 
                     </Stack>
                     :
-                    <Stack direction="row" spacing={1}>
+                    <Stack direction="row" spacing={1} className={'profile'}>
                         <Button component={Link} to='/register' variant='text' sx={{ width: '100px' }} className='textColor button'>Join now</Button>
                         <Button component={Link} to='/login' variant='outlined' sx={{ width: '100px' }} className='secondary button'>Sign in</Button>
                     </Stack>
