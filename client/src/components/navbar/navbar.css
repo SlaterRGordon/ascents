@@ -2,8 +2,27 @@
 	background-color: var(--color-back) !important;
 }
 
-.logo {
-    flex-grow: 1;
+.logo-div {
     display: flex;
     align-items: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    color: var(--color-fadedtext) !important;
+    padding: 0px 24px;
+}
+.link:hover {
+    color: var(--color-hovertext) !important;
 }

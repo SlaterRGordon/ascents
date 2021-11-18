@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import * as actionType from '../../flux/types/types';
-import { AppBar, Toolbar, Stack, Button, Menu, MenuItem, IconButton, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Stack, Button, Menu, MenuItem, IconButton, Avatar, Link as MuiLink } from '@mui/material';
 import logo from '../../images/logotext.png';
 
 const Navbar = () => {
@@ -36,11 +36,23 @@ const Navbar = () => {
     return (
         <AppBar className='navbar' position='fixed'>
             <Toolbar>
-                <Link to="/" className={'logo'}>
-                    <img src={logo} alt="icon" height="40px" />
-                </Link>
+                <div className={'logo-div'}>
+                 <img src={logo} alt="icon" height="40px" />
+                </div>
+                <Stack direction={'row'} spacing={1} sx={{flexGrow: 3, justifyContent: 'center'}}>
+                    <MuiLink href="/" className={'link'} underline="none">
+                        Home
+                    </MuiLink>
+                    <MuiLink href="/" className={'link'} underline="none">
+                        Training
+                    </MuiLink>
+                    <MuiLink href="/" className={'link'} underline="none">
+                        Explore
+                    </MuiLink>
+                </Stack>
+
                 {authData ?
-                    <Stack direction="row" spacing={1}>
+                    <Stack direction="row" spacing={1} className={'profile'}>
                         <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
                             <Avatar sx={{ width: 32, height: 32, backgroundColor: 'var(--color-primary)' }}>S</Avatar>
                         </IconButton>
