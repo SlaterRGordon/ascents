@@ -17,7 +17,7 @@ function App() {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('profile'));
-        if(user) {
+        if (user) {
             dispatch(loadUser(JSON.parse(localStorage.getItem('profile')).user.id));
         }
     }, [dispatch]);

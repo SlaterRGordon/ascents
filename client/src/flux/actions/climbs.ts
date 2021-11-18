@@ -15,9 +15,9 @@ export const getClimb = (id) => async (dispatch) => {
 export const getClimbs = (page) => async (dispatch) => {
     try {
         dispatch({ type: actionType.START_LOADING });
-        const { data: { data, currentPage, numberOfPages } } = await api.fetchClimbs(page);
+        const { data } = await api.fetchClimbs(page);
 
-        dispatch({ type: actionType.FETCH_CLIMBS, payload: { data, currentPage, numberOfPages } });
+        dispatch({ type: actionType.FETCH_CLIMBS, payload: data });
         dispatch({ type: actionType.END_LOADING });
     } catch (error) {
         console.log(error);

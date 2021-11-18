@@ -4,8 +4,8 @@ import {
 import './climb.css';
 
 const Climb = ({climb}) => {
-    var description = climb.description.slice(0,50);
-    if (climb.description.length > 50) {
+    var description = climb.description?.slice(0,50);
+    if (climb.description?.length > 50) {
         description += '...';
     }
     return (

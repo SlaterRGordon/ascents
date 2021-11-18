@@ -1,38 +1,73 @@
 import './climbs.css';
 import {
-    Grid, LinearProgress, Paper
+    Grid, CircularProgress
 } from '@mui/material';
 import Climb from './climb/climb';
-import Paginate from '../pagination/pagination';
-import { RootStateOrAny, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState, useRef } from 'react';
+import { getClimbs } from '../../flux/actions/climbs';
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
+function isBottom(ref: React.RefObject<HTMLDivElement>) {
+    if (!ref.current) {
+        return false;
+    }
+    return ref.current.getBoundingClientRect().bottom <= window.innerHeight;
 }
 
 const Climbs = () => {
-    const { climbs, isLoading } = useSelector((state: RootStateOrAny) => state.climbs);
+    const { climbs, hasMore } = useSelector((state: RootStateOrAny) => state.climbs);
+    const [initialLoad, setInitialLoad] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
-    const query = useQuery();
-    const page = query.get('page') || 1;
+    useEffect(() => {
+        const loadMore = async () => {
+            setPage((page) => page + 1);
+            await dispatch(getClimbs(page));
+            setLoading(false);
+        }
 
-    if (!climbs.length && !isLoading) return (<>No posts</>);
+        if (initialLoad) {
+            setLoading(true);
+            loadMore();
+            setInitialLoad(false);
+        }
+    }, [initialLoad, dispatch, page]);
+
+    useEffect(() => {
+        const loadMore = async () => {
+            setPage((page) => page + 1);
+            await dispatch(getClimbs(page));
+            setLoading(false);
+        }
+
+        const onScroll = () => {
+            if (!loading
+                && hasMore
+                && isBottom(contentRef)) {
+                setLoading(true);
+                loadMore();
+            }
+        };
+
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+    }, [loading, dispatch, page, hasMore]);
+
+    if (!climbs.length && !loading) return (<>No posts</>);
 
     return (
         <>
-            {isLoading ? <LinearProgress sx={{marginTop: '-24px', width: '100vw', position: 'absolute', left: '0px', display: 'flex', flexGrow: 1}} /> : (
-            <Grid container alignItems={'stretch'} spacing={3} className={'climbs'}>
-                {climbs?.map((climb) => (
-                    <Grid key={climb._id} item xs={12} sm={12} md={6} lg={3}>
+            <Grid ref={contentRef} container alignItems={'stretch'} spacing={3} className={'climbs'}>
+                {climbs?.map((climb) => {
+                    return <Grid key={climb._id} item xs={12} sm={12} md={12} lg={12}>
                         <Climb climb={climb} />
-                    </Grid>
-                ))}
+                    </Grid>;
+                })}
             </Grid>
-            )}
-            <Paper elevation={6} className='paginate'>
-                <Paginate page={page} />
-            </Paper>
+            {hasMore?<CircularProgress sx={{ alignSelf: "center" }} disableShrink={true} />:""}
         </>
     );
 };
