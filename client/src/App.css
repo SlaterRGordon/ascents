@@ -1,11 +1,12 @@
 :root {
-    --color-text: #FFFFFF;
+    --color-text: #585858;
+    --color-hovertext: #000000;
     --color-fadedtext: #a3a0a0;
-    --color-back: #303030;
-	--color-front: #424242;
+    --color-back: transparent;
+	--color-front: transparent;
     --color-dark: #212121;
     --color-error: #CF6679;
-    --color-primary: #f59f21;
+    --color-primary: #478778;
 }
 
 html, body, body > div {
@@ -44,14 +45,25 @@ html, body, body > div {
     color: var(--color-primary) !important;
 }
 
+.textColor {
+    color: var(--color-text) !important ;
+}
+.textColor:hover {
+    color: var(--color-hovertext) !important;
+}
+
 .secondary {
-    color: var(--color-text) !important;
-    border: 1px solid var(--color-text) !important;
+    color: var(--color-primary) !important;
+    border: 1px solid var(--color-primary) !important;
+}
+.secondary:hover {
+    border: 2px solid var(--color-primary) !important;
 }
 
 .button {
     text-transform: none !important;
     font-weight: 600 !important;
+    width: 100px !important;
 }
 
 label.Mui-focused {

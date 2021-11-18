@@ -7,13 +7,11 @@ import User from "../models/user.js";
 const { JWT_SECRET } = config;
 
 export const loadUser = async (req, res) => {
-    console.log(req.query);
     const { userId } = req.query;
-    console.log(userId);
 
     try {
         const user = await User.findById(userId).select('-password');
-        console.log(user);
+
         if (!user) throw Error('User does not exist');
         console.log(user);
         res.status(200).json({

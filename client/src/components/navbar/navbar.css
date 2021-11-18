@@ -1,3 +1,9 @@
 .navbar {
 	background-color: var(--color-back) !important;
 }
+
+.logo {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}

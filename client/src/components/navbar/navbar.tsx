@@ -4,6 +4,7 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import * as actionType from '../../flux/types/types';
 import { AppBar, Toolbar, Typography, Stack, Button } from '@mui/material';
+import logo from '../../images/logotext.png';
 
 const Navbar = () => {
     const { authData } = useSelector((state: RootStateOrAny) => state.auth);
@@ -24,18 +25,18 @@ const Navbar = () => {
     return (
         <AppBar className='navbar' position='fixed'>
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Ascents
-                </Typography>
+                <Link to="/" className={'logo'}>
+                    <img src={logo} alt="icon" height="40px" />
+                </Link>
                 {authData ?
                     <Stack direction="row" spacing={1}>
-                        <Typography variant="h6" component="div"></Typography>
+                        <Typography variant="h6" component="div">{authData.user.username}</Typography>
                         <Button variant='contained' className='primary button' onClick={() => logout()}>Logout</Button>
                     </Stack>
                     :
                     <Stack direction="row" spacing={1}>
-                        <Button component={Link} to='/login' variant='contained' className='primary button'>Login</Button>
-                        <Button component={Link} to='/register' variant='contained' className='primary button'>Register</Button>
+                        <Button component={Link} to='/register' variant='text' className='textColor button'>Join now</Button>
+                        <Button component={Link} to='/login' variant='outlined' className='secondary button'>Sign in</Button>
                     </Stack>
                 }
             </Toolbar>

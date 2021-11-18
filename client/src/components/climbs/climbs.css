@@ -1,11 +1,11 @@
 .paginate {
-    position: absolute;
-    bottom: 24px;
-    right: 24px;
-    left: 24px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
     display: flex;
     justify-content: center;
     padding: 4px;
+    position: sticky;
 }
 
 .climbs {
