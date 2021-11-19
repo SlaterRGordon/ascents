@@ -11,7 +11,7 @@ API.interceptors.request.use((req) => {
 });
 
 export const fetchClimb = (id) => API.get(`/climbs/${id}`);
-export const fetchClimbs = (page) => API.get(`/climbs?page=${page}`);
+export const fetchClimbs = (query) => API.get(`/climbs?page=${query.page}&name=${query.name || 'none'}`);
 export const createClimb = (newClimb) => API.post('/climbs', newClimb);
 export const deleteClimb = (id) => API.delete(`/climbs/${id}`);
 

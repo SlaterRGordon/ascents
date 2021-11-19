@@ -12,10 +12,10 @@ export const getClimb = (id) => async (dispatch) => {
     }
 };
 
-export const getClimbs = (page) => async (dispatch) => {
+export const getClimbs = (query) => async (dispatch) => {
     try {
         dispatch({ type: actionType.START_LOADING });
-        const { data } = await api.fetchClimbs(page);
+        const { data } = await api.fetchClimbs(query);
 
         dispatch({ type: actionType.FETCH_CLIMBS, payload: data });
         dispatch({ type: actionType.END_LOADING });

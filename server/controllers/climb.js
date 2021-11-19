@@ -1,7 +1,7 @@
 import Climb from "../models/climb.js";
 
 export const getClimbs = async (req, res) => {
-    const { page } = req.query;
+    const { page, name } = req.query;
 
     try {
         const limit = 12;
@@ -9,7 +9,14 @@ export const getClimbs = async (req, res) => {
         
         const total = await Climb.countDocuments();
         const hasMore = total >= startIndex + limit;
-        const climbs = await Climb.find().sort({_id: -1}).limit(limit).skip(startIndex);
+
+        let climbs = [];
+        if (name !== 'none') {
+            climbs = await Climb.find({...name}).sort({_id: -1}).limit(limit).skip(startIndex);
+        } else {
+            climbs = await Climb.find().sort({_id: -1}).limit(limit).skip(startIndex);
+        }
+        
         if(!climbs) {
             climbs = [];
         }

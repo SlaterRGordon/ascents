@@ -1,12 +1,12 @@
 import './climbs.css';
 import {
-    Grid, CircularProgress
+    Grid, CircularProgress, AppBar, Toolbar, TextField
 } from '@mui/material';
 import Climb from './climb/climb';
+import { useLocation, useNavigate } from 'react-router';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
-import { getClimbs } from '../../flux/actions/climbs';
-import * as actionType from '../../flux/types/types';
+import { clearClimbs, getClimbs } from '../../flux/actions/climbs';
 
 function isBottom(ref: React.RefObject<HTMLDivElement>) {
     if (!ref.current) {
@@ -20,13 +20,31 @@ const Climbs = () => {
     const [initialLoad, setInitialLoad] = useState(true);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
+    const [name, setName] = useState('');
     const contentRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const searchPost = () => {
+        if (name.trim()) {
+            dispatch(clearClimbs());
+            dispatch(getClimbs({ name: name, page: page }));
+            navigate(`/?name=${name || 'none'}&page=${page}`);
+        } else {
+            navigate('/');
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+            searchPost();
+        }
+    };
 
     useEffect(() => {
         const loadMore = async () => {
             setPage((page) => page + 1);
-            await dispatch(getClimbs(page));
+            await dispatch(getClimbs({ name: name, page: page }));
             setLoading(false);
         }
 
@@ -35,12 +53,12 @@ const Climbs = () => {
             loadMore();
             setInitialLoad(false);
         }
-    }, [initialLoad, dispatch, page]);
+    }, [initialLoad, dispatch, page, name]);
 
     useEffect(() => {
         const loadMore = async () => {
             setPage((page) => page + 1);
-            await dispatch(getClimbs(page));
+            await dispatch(getClimbs({ name: name, page: page }));
             setLoading(false);
         }
 
@@ -55,12 +73,18 @@ const Climbs = () => {
 
         window.addEventListener('scroll', onScroll);
         return () => window.removeEventListener('scroll', onScroll);
-    }, [loading, dispatch, page, hasMore]);
+    }, [loading, dispatch, page, hasMore, name]);
 
     if (!climbs.length && !loading) return (<>No posts</>);
 
     return (
         <>
+            <AppBar>
+                <Toolbar>
+                    <TextField onKeyDown={handleKeyPress} name="name" variant="outlined" label="Name"
+                        fullWidth value={name} onChange={(e) => setName(e.target.value)} />
+                </Toolbar>
+            </AppBar>
             <Grid ref={contentRef} container alignItems={'stretch'} spacing={3} className={'climbs'}>
                 {climbs?.map((climb) => {
                     return <Grid key={climb._id} item xs={12} sm={12} md={12} lg={12}>
@@ -68,7 +92,7 @@ const Climbs = () => {
                     </Grid>;
                 })}
             </Grid>
-            {hasMore?<CircularProgress sx={{ alignSelf: "center" }} disableShrink={true} />:""}
+            {hasMore ? <CircularProgress sx={{ alignSelf: "center" }} disableShrink={true} /> : ""}
         </>
     );
 };
