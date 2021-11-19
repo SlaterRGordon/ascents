@@ -12,6 +12,7 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const CREATE_CLIMB = 'CREATE_CLIMB';
 export const DELETE_CLIMB = 'DELETE_CLIMB';
 export const FETCH_CLIMBS = 'FETCH_CLIMBS';
+export const CLEAR_CLIMBS = 'CLEAR_CLIMBS';
 export const FETCH_CLIMB = 'FETCH_CLIMB';
 
 export const CREATE_ASCENT = 'CREATE_ASCENT';

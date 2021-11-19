@@ -7,18 +7,15 @@ const climbReducer = (state = { isLoading: true, climbs: [], prevClimbs: null },
         case 'END_LOADING':
             return { ...state, isLoading: false };
         case actionType.FETCH_CLIMBS:
-            if(state.prevClimbs === action.payload) {
-                return {
-                    ...state,
-                    climbs: [...state.climbs],
-                    prevClimbs: action.payload
-                };
-            }
             return {
                 ...state,
                 climbs: [...state.climbs.concat(action.payload.data)],
-                prevClimbs: action.payload.data,
                 hasMore: action.payload.hasMore
+            };
+        case actionType.CLEAR_CLIMBS:
+            return {
+                ...state,
+                climbs: [],
             };
         case actionType.FETCH_CLIMB:
             return { ...state, climb: action.payload.climb };

@@ -6,6 +6,7 @@ import Climb from './climb/climb';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 import { getClimbs } from '../../flux/actions/climbs';
+import * as actionType from '../../flux/types/types';
 
 function isBottom(ref: React.RefObject<HTMLDivElement>) {
     if (!ref.current) {

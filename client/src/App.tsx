@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { loadUser } from './flux/actions/auth';
+import { clearClimbs } from './flux/actions/climbs';
 import { Navigate } from 'react-router';
 import { Toolbar, Container } from '@mui/material';
 import Navbar from './components/navbar/navbar';
@@ -21,6 +22,10 @@ function App() {
             dispatch(loadUser(JSON.parse(localStorage.getItem('profile')).user.id));
         }
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(clearClimbs());
+    });
 
     return (
         <Router basename='/'>

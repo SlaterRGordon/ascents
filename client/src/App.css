@@ -12,7 +12,6 @@
 html, body, body > div {
     height: 100%;
     margin: 0px;
-	background-color: var(--color-front);
     color: var(--color-fadedtext);
     display: flex;
     flex-direction: column;

@@ -24,6 +24,14 @@ export const getClimbs = (page) => async (dispatch) => {
     }
 };
 
+export const clearClimbs = () => async (dispatch) => {
+    try {
+        dispatch({ type: actionType.CLEAR_CLIMBS });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const createClimb = (climb) => async (dispatch) => {
     try {
         dispatch({ type: actionType.START_LOADING });
