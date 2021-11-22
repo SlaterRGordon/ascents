@@ -1,6 +1,6 @@
 import * as actionType from '../types/types';
 
-const climbReducer = (state = { isLoading: true, climbs: [], prevClimbs: null }, action) => {
+const climbReducer = (state = { isLoading: true, climbs: [] }, action) => {
     switch (action.type) {
         case 'START_LOADING':
             return { ...state, isLoading: true };
