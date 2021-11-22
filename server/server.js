@@ -6,6 +6,7 @@ import config from './config/index.js';
 import authRouter from'./routes/auth.js';
 import climbRouter from'./routes/climbs.js';
 import ascentRouter from'./routes/ascents.js';
+import gradeRouter from'./routes/grades.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use("/auth", authRouter);
 app.use("/climbs", climbRouter);
+app.use("/grades", gradeRouter);
 
 const { MONGO_URI, MONGO_DB_NAME, PORT } = config;
 const db = `${MONGO_URI}/${MONGO_DB_NAME}`;
