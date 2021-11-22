@@ -20,5 +20,11 @@ export const DELETE_ASCENT = 'DELETE_ASCENT';
 export const FETCH_ASCENTS = 'FETCH_ASCENTS';
 export const FETCH_ASCENT = 'FETCH_ASCENT';
 
+export const CREATE_GRADE = 'CREATE_GRADE';
+export const DELETE_GRADE = 'DELETE_GRADE';
+export const FETCH_GRADES = 'FETCH_GRADES';
+export const CLEAR_GRADES = 'CLEAR_GRADES';
+export const FETCH_GRADE = 'FETCH_GRADE';
+
 export const END_LOADING = 'END_LOADING';
 export const START_LOADING = 'START_LOADING';

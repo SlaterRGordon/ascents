@@ -20,6 +20,11 @@ export const fetchAscentsByUser = ({page, userId}) => API.get(`/ascents?page=${p
 export const createAscent = (newAscent) => API.post('/ascents', newAscent);
 export const deleteAscent = (id) => API.delete(`/ascents/${id}`);
 
+export const fetchGrade = (id) => API.get(`/grades/${id}`);
+export const fetchGrades = () => API.get(`/grades`);
+export const createGrade = (newGrade) => API.post('/grades', newGrade);
+export const deleteGrade = (id) => API.delete(`/grades/${id}`);
+
 export const loadUser = (userId) => API.get(`/auth/loadUser?userId=${userId}`);
 export const login = (formData) => API.post('/auth/login', formData);
 export const register = (formData) => API.post('/auth/register', formData);
