@@ -13,7 +13,7 @@ export const loadUser = async (req, res) => {
         const user = await User.findById(userId).select('-password');
 
         if (!user) throw Error('User does not exist');
-        console.log(user);
+
         res.status(200).json({
             token: req.headers.authorization.split(' ')[1],
             user: {
