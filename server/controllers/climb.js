@@ -14,8 +14,7 @@ export const getClimbs = async (req, res) => {
 		sort[req.query.sortBy] = req.query.orderBy === 'desc' ? -1 : 1;
 
 		const climbs = await Climb.find(query).sort(sort).limit(Number(req.query.limit)).skip(Number(req.query.skip));
-		const total = await Climb.find(query).count();
-		console.log(req.query.limit + req.query.skip);	
+		const total = await Climb.find(query).count();	
 		
 		res.json({ data: climbs, hasMore: total >= Number(req.query.limit) + Number(req.query.skip) });
 	} catch (error) {

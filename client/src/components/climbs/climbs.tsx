@@ -3,6 +3,8 @@ import {
 	Grid, CircularProgress, Toolbar, TextField, Stack, Typography, IconButton, Menu, MenuItem, Rating
 } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Climb from './climb/climb';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
@@ -50,10 +52,15 @@ const Climbs = () => {
 		setQuality(newQuality);
 	};
 
+	const handleSort = (sort, order) => {
+		setSortBy(sort);
+		setOrderBy(order);
+	};
+
 	useEffect(() => {
 		if(!initialLoad) searchPost();
-	}, [quality]);
-	
+	}, [quality, sortBy, orderBy]);
+
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
@@ -133,9 +140,10 @@ const Climbs = () => {
 				open={open}
 				onClose={handleClose}
 			>
-				<MenuItem onClick={handleClose}>Name</MenuItem>
-				<MenuItem onClick={handleClose}>Quality</MenuItem>
-				<MenuItem onClick={handleClose}>Grade</MenuItem>
+				<MenuItem className="sort" onClick={() => handleSort('name', 'asc')}>Name Ascending<ArrowUpwardIcon /></MenuItem>
+				<MenuItem className="sort" onClick={() => handleSort('name', 'desc')}>Name Descending<ArrowDownwardIcon /></MenuItem>
+				<MenuItem className="sort" onClick={() => handleSort('quality', 'asc')}>Quality Ascending<ArrowUpwardIcon /></MenuItem>
+				<MenuItem className="sort" onClick={() => handleSort('quality', 'desc')}>Quality Descending<ArrowDownwardIcon /></MenuItem>
 			</Menu>
 		</Toolbar>
 	);
