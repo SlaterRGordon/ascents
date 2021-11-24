@@ -37,6 +37,12 @@
 	flex-basis: 0;
 }
 
+.sort {
+	display: flex !important;
+	justify-content: space-between !important;
+	border-bottom: 1px var(--color-primary) !important;
+}
+
 .MuiSlider-thumb::after {
 	height: 20px !important;
 	width: 20px !important;
