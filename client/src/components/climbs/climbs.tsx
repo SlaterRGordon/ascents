@@ -32,7 +32,6 @@ const Climbs = () => {
 	const dispatch = useDispatch();
 
 	const searchPost = async () => {
-		setPage(1);
 		await dispatch(clearClimbs());
 		await dispatch(getClimbs({ 
 			name: name, limit: 12, skip: 0,
@@ -72,13 +71,13 @@ const Climbs = () => {
 
 	useEffect(() => {
 		const loadMore = async () => {
-			setPage((page) => page + 1);
 			await dispatch(getClimbs({ 
-				name: name, limit: 12, skip: (page-1)*12,
+				name: name, limit: 12, skip: (page)*12,
 				qualityMin: quality, qualityMax: 5,
 				sortBy: sortBy,
 				orderBy: orderBy
 			}));
+			setPage((page) => page + 1);
 			setLoading(false);
 		}
 
@@ -96,13 +95,13 @@ const Climbs = () => {
 
 	useEffect(() => {
 		const loadMore = async () => {
-			setPage((page) => page + 1);
 			await dispatch(getClimbs({ 
-				name: name, limit: 12, skip: (page-1)*12, 
+				name: name, limit: 12, skip: (page)*12, 
 				qualityMin: quality, qualityMax: 5,
 				sortBy: sortBy,
 				orderBy: orderBy
 			}));
+			setPage((page) => page + 1);
 			setLoading(false);
 		}
 
