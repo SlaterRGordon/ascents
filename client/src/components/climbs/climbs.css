@@ -23,6 +23,7 @@
 	background-color: var(--color-back) !important;
 	border-radius: 4px;
 	margin-bottom: 16px;
+	padding: 0px !important;
 }
 
 .filter-search {

@@ -4,28 +4,20 @@ import sanitize from 'mongo-sanitize';
 export const getClimbs = async (req, res) => {
 
 	try {
-		var name = sanitize(req.query.name);
-		var page = sanitize(req.query.page);
+		let query = {
+			"name": { $regex: `${req.query.name}`, $options: 'i' },
+			"quality": { $gt: `${req.query.qualityMin}`, $lt: `${req.query.qualityMax}` },
+		};
 
-		const limit = 12;
-		const startIndex = (Number(page) - 1) * limit;
-		let total = 0;
-		let climbs = [];
-		if (name !== 'none') {
-			climbs = await Climb.find({ name: { "$regex": name, "$options": "i" } }).sort({ _id: -1 }).limit(limit).skip(startIndex);
-			total = await Climb.find({ name: { "$regex": name, "$options": "i" } }).count();
-		} else {
-			climbs = await Climb.find().sort({ _id: -1 }).limit(limit).skip(startIndex);
-			total = await Climb.find().count();
-		}
-		console.log(total);
-		const hasMore = total >= startIndex + limit;
+		let sort = {};
 
-		if (!climbs) {
-			climbs = [];
-		}
+		sort[req.query.sortBy] = req.query.orderBy === 'desc' ? -1 : 1;
 
-		res.json({ data: climbs, hasMore: hasMore });
+		const climbs = await Climb.find(query).sort(sort).limit(Number(req.query.limit)).skip(Number(req.query.skip));
+		const total = await Climb.find(query).count();
+		console.log(req.query.limit + req.query.skip);	
+		
+		res.json({ data: climbs, hasMore: total >= Number(req.query.limit) + Number(req.query.skip) });
 	} catch (error) {
 		console.log(error);
 		res.status(404).json({ message: error.message });
