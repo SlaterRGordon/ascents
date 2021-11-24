@@ -32,6 +32,7 @@ const Climbs = () => {
 	const dispatch = useDispatch();
 
 	const searchPost = async () => {
+		setPage(1);
 		await dispatch(clearClimbs());
 		await dispatch(getClimbs({ 
 			name: name, limit: 12, skip: 0,
