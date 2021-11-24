@@ -1,6 +1,6 @@
 import './climbs.css';
 import {
-	Grid, CircularProgress, AppBar, Toolbar, TextField, Slider, Stack, Typography, IconButton, Menu, MenuItem
+	Grid, CircularProgress, Toolbar, TextField, Stack, Typography, IconButton, Menu, MenuItem, Rating
 } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 import Climb from './climb/climb';
@@ -8,7 +8,6 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 import { clearClimbs, getClimbs } from '../../flux/actions/climbs';
 import { getGrades } from '../../flux/actions/grades';
-import { Filter } from '@mui/icons-material';
 
 function isBottom(ref: React.RefObject<HTMLDivElement>) {
 	if (!ref.current) {
@@ -19,21 +18,26 @@ function isBottom(ref: React.RefObject<HTMLDivElement>) {
 
 const Climbs = () => {
 	const { climbs, hasMore } = useSelector((state: RootStateOrAny) => state.climbs);
-	const { grades } = useSelector((state: RootStateOrAny) => state.grades);
 	const [initialLoad, setInitialLoad] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [name, setName] = useState('');
-	const [quality, setQuality] = useState([0, 5]);
-	const [grade, setGrade] = useState([0, 17]);
+	const [quality, setQuality] = useState(0);
+	const [sortBy, setSortBy] = useState('name');
+	const [orderBy, setOrderBy] = useState('asc');
 
 	const contentRef = useRef<HTMLDivElement>(null);
 	const dispatch = useDispatch();
 
 	const searchPost = async () => {
 		setPage(1);
-		dispatch(clearClimbs());
-		dispatch(getClimbs({ name: name, page: 1 }));
+		await dispatch(clearClimbs());
+		await dispatch(getClimbs({ 
+			name: name, limit: 12, skip: 0,
+			qualityMin: quality, qualityMax: 5,
+			sortBy: sortBy,
+			orderBy: orderBy
+		}));
 	};
 
 	const handleKeyPress = (e) => {
@@ -46,14 +50,10 @@ const Climbs = () => {
 		setQuality(newQuality);
 	};
 
-	const handleGradeChange = (e, newGrade) => {
-		setGrade(newGrade);
-	};
-
-	function gradeText(value) {
-		return `v${value}`;
-	}
-
+	useEffect(() => {
+		if(!initialLoad) searchPost();
+	}, [quality]);
+	
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
@@ -66,7 +66,12 @@ const Climbs = () => {
 	useEffect(() => {
 		const loadMore = async () => {
 			setPage((page) => page + 1);
-			await dispatch(getClimbs({ name: name, page: page }));
+			await dispatch(getClimbs({ 
+				name: name, limit: 12, skip: (page-1)*12,
+				qualityMin: quality, qualityMax: 5,
+				sortBy: sortBy,
+				orderBy: orderBy
+			}));
 			setLoading(false);
 		}
 
@@ -80,12 +85,17 @@ const Climbs = () => {
 			loadMore();
 			setInitialLoad(false);
 		}
-	}, [initialLoad, dispatch, page, name]);
+	}, [initialLoad, dispatch, page, name, quality, sortBy, orderBy]);
 
 	useEffect(() => {
 		const loadMore = async () => {
 			setPage((page) => page + 1);
-			await dispatch(getClimbs({ name: name, page: page }));
+			await dispatch(getClimbs({ 
+				name: name, limit: 12, skip: (page-1)*12, 
+				qualityMin: quality, qualityMax: 5,
+				sortBy: sortBy,
+				orderBy: orderBy
+			}));
 			setLoading(false);
 		}
 
@@ -100,13 +110,7 @@ const Climbs = () => {
 
 		window.addEventListener('scroll', onScroll);
 		return () => window.removeEventListener('scroll', onScroll);
-	}, [loading, dispatch, page, hasMore, name]);
-
-	useEffect(() => {
-		if (grades.length > 0) {
-			setGrade([grades[0][0].value, grades[0][grades[0].length - 1].value]);
-		};
-	}, [grades])
+	}, [loading, dispatch, page, hasMore, name, quality, sortBy, orderBy]);
 
 	const FilterBar = (
 		<Toolbar className={'filterbar'}>
@@ -118,13 +122,7 @@ const Climbs = () => {
 				<Typography>
 					Quality
 				</Typography>
-				<Slider value={quality} onChange={handleQualityChange} min={0} max={5} step={0.1} />
-			</Stack>
-			<Stack className={'filter-item'}>
-				<Typography>
-					Grade
-				</Typography>
-				<Slider value={grade} onChange={handleGradeChange} step={1} min={0} max={17} valueLabelFormat={gradeText} valueLabelDisplay="on" />
+				<Rating value={quality} onChange={handleQualityChange} precision={0.1} />
 			</Stack>
 			<IconButton onClick={handleClick} size="large" >
 				<SortIcon fontSize={'large'} />
