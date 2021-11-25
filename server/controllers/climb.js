@@ -2,7 +2,6 @@ import Climb from "../models/climb.js";
 import sanitize from 'mongo-sanitize';
 
 export const getClimbs = async (req, res) => {
-
 	try {
 		let query = {
 			"name": { $regex: `${req.query.name}`, $options: 'i' },

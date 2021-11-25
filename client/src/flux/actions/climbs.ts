@@ -6,7 +6,7 @@ export const getClimb = (id) => async (dispatch) => {
         dispatch({ type: actionType.START_LOADING });
         const { data } = await api.fetchClimb(id);
 
-        dispatch({ type: actionType.FETCH_CLIMB, payload: { post: data } });
+        dispatch({ type: actionType.FETCH_CLIMB, payload: { data } });
     } catch (error) {
         console.log(error);
     }

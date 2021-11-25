@@ -18,7 +18,7 @@ const climbReducer = (state = { isLoading: true, climbs: [] }, action) => {
                 climbs: [],
             };
         case actionType.FETCH_CLIMB:
-            return { ...state, climb: action.payload.climb };
+            return { ...state, climb: action.payload.data };
         case actionType.CREATE_CLIMB:
             return { ...state, climbs: [...state.climbs, action.payload] };
         case actionType.DELETE_CLIMB:
