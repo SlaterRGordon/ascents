@@ -10,6 +10,7 @@ import Navbar from './components/navbar/navbar';
 import LoginPage from './components/auth/login/login';
 import RegisterPage from './components/auth/register/register';
 import Climbs from './components/climbs/climbs';
+import ClimbDetails from './components/climbDetails/climbDetails';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Container className="mainContainer">
                 <Routes>
                     <Route path='/' element={(<Climbs />)}></Route>
+					<Route path='/:id' element={(<ClimbDetails />)}></Route>
                     <Route path='/login' element={(!authData ? <LoginPage /> : <Navigate to='/' />)}></Route>
                     <Route path='/register' element={(!authData ? <RegisterPage /> : <Navigate to='/' />)}></Route>
                 </Routes>
