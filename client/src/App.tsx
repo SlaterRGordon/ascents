@@ -5,12 +5,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { loadUser } from './flux/actions/auth';
 import { clearClimbs } from './flux/actions/climbs';
 import { Navigate } from 'react-router';
-import { Toolbar, Container } from '@mui/material';
+import { Toolbar } from '@mui/material';
 import Navbar from './components/navbar/navbar';
 import LoginPage from './components/auth/login/login';
 import RegisterPage from './components/auth/register/register';
-import Climbs from './components/climbs/climbs';
-import ClimbDetails from './components/climbDetails/climbDetails';
+import Home from './components/home/home';
 
 
 function App() {
@@ -32,14 +31,11 @@ function App() {
         <Router basename='/'>
             <Navbar />
             <Toolbar />
-            <Container className="mainContainer">
-                <Routes>
-                    <Route path='/' element={(<Climbs />)}></Route>
-					<Route path='/:id' element={(<ClimbDetails />)}></Route>
-                    <Route path='/login' element={(!authData ? <LoginPage /> : <Navigate to='/' />)}></Route>
-                    <Route path='/register' element={(!authData ? <RegisterPage /> : <Navigate to='/' />)}></Route>
-                </Routes>
-            </Container>
+            <Routes>
+				<Route path='/' element={(<Home />)}></Route>
+				<Route path='/login' element={(!authData ? <LoginPage /> : <Navigate to='/' />)}></Route>
+				<Route path='/register' element={(!authData ? <RegisterPage /> : <Navigate to='/' />)}></Route>
+			</Routes>
         </Router>
     );
 }

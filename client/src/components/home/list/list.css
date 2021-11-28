@@ -1,0 +1,11 @@
+.list {
+	height: calc(100% - 64px);
+	overflow: auto;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+	align-content: flex-start;
+}
+
+.list::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}

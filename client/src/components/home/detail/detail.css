@@ -1,0 +1,27 @@
+.detail {
+	display: flex;
+	flex-direction: column;
+	margin: 4px;
+	padding: 8px;
+	border-radius: 0.5rem;
+	background-color: var(--color-dark);
+	height: calc(100% - 88px);
+}
+
+.detailHeader {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+}
+
+.detailBody {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	padding: 8px;
+}
+
+.headerIcon {
+	color: var(--color-text) !important;
+}

@@ -1,32 +1,35 @@
 :root {
-    --color-text: #ffffff;
+    --color-text: #dfdfdf;
     --color-hovertext: #000000;
     --color-fadedtext: #585858;
     --color-back: #FFFFFF;
 	--color-front: #FFFFFF;
-    --color-dark: #212121;
+    --color-dark: #404040;
+	--color-darker: #333333;
     --color-error: #CF6679;
-    --color-primary: #478778;
+    --color-primary: #60e8af;
 }
 
-html, body, body > div {
-    height: 100%;
+html, body, body > #root {
     margin: 0px;
-    color: var(--color-fadedtext);
+    color: var(--color-text);
+	background-color: var(--color-fadedtext);
     display: flex;
     flex-direction: column;
     font-family: 'Roboto' !important;
     font-weight: 600 !important;
     font-size: 12pt !important;
+	height: 100%;
+	overflow: auto;
 }
 
-.mainContainer {
+/* .mainContainer {
     padding: 24px !important;
     display: flex !important;
     flex-direction: column !important;
     flex-grow: 1 !important;
     justify-content: space-between !important;
-}
+} */
 
 .flex-center {
     display: flex !important;
@@ -48,7 +51,7 @@ html, body, body > div {
 }
 
 .textColor {
-    color: var(--color-fadedtext) !important ;
+    color: var(--color-text) !important ;
 }
 .textColor:hover {
     color: var(--color-hovertext) !important;
@@ -66,26 +69,30 @@ html, body, body > div {
     text-transform: none !important;
 }
 
+.MuiSvgIcon-root {
+	
+}
+
 label.Mui-focused {
-    color: var(--color-fadedtext) !important;
+    color: var(--color-text) !important;
 }
 .MuiInput-underline:after {
-    border-bottom-color: var(--color-fadedtext) !important;
+    border-bottom-color: var(--color-text) !important;
 }
 .MuiOutlinedInput-root > fieldset {
-    border-color: var(--color-fadedtext) !important;   
+    border-color: var(--color-text) !important;   
 }
 .MuiOutlinedInput-root > input {
-    color: var(--color-fadedtext) !important;   
+    color: var(--color-text) !important;   
 }
 .MuiInputLabel-root {
-    color: var(--color-fadedtext) !important;   
+    color: var(--color-text) !important;   
 }
 .MuiOutlinedInput-root > fieldset:hover {
-    border-color: var(--color-fadedtext) !important;
+    border-color: var(--color-text) !important;
 }
 .MuiOutlinedInput-root > .Mui-focused > fieldset {
-    border-color: var(--color-fadedtext) !important;
+    border-color: var(--color-text) !important;
 }
 .MuiButton-startIcon {
     margin-right: 8px !important;

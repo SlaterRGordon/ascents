@@ -1,0 +1,23 @@
+.filterbar {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filter-item {
+	display: flex;
+	margin: 8px 12px;
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.sort {
+	display: flex !important;
+	justify-content: space-between !important;
+	border-bottom: 1px var(--color-primary) !important;
+	background-color: var(--color-darker);
+}
+
+.MuiMenu-list, .MuiMenu-paper {
+	background-color: var(--color-darker) !important;
+	color: var(--color-text) !important;
+}

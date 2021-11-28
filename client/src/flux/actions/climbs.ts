@@ -26,7 +26,7 @@ export const getClimbs = (query) => async (dispatch) => {
 
 export const clearClimbs = () => async (dispatch) => {
     try {
-        dispatch({ type: actionType.CLEAR_CLIMBS });
+		dispatch({ type: actionType.CLEAR_CLIMBS });
     } catch (error) {
         console.log(error);
     }

@@ -1,0 +1,12 @@
+.container {
+	height: calc(100% - 64px);
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+.listContainer {
+	height: 100%;
+}
+.detailContainer {
+	height: 100%;
+}
