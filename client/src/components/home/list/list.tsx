@@ -113,8 +113,10 @@ const List = (props: ListProps) => {
 			}
 		};
 
-		document.getElementById("list").addEventListener('scroll', onScroll);
-		return () => document.getElementById("list").removeEventListener('scroll', onScroll);
+		if(document.getElementById("list")) {
+			document.getElementById("list").addEventListener('scroll', onScroll);
+			return () => document.getElementById("list").removeEventListener('scroll', onScroll);
+		}
 	}, [loading, hasMore, contentRef, page]);
 
 	return (

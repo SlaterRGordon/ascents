@@ -42,7 +42,7 @@ html, body, body > #root {
 }
 
 .primary {
-    color: var(--color-text) !important;
+    color: var(--color-darker) !important;
     background-color: var(--color-primary) !important;
 }
 

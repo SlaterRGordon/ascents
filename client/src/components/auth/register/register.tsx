@@ -1,4 +1,6 @@
 
+import '../auth.css';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -56,7 +58,7 @@ const RegisterPage = () => {
 
     return (
         <form onSubmit={handleOnSubmit} className={'flex-center'}>
-            <Paper elevation={6}>
+            <Paper elevation={6} className="authForm">
             <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
                 <Stack spacing={2}>
                     <Typography variant="h4" component="div">

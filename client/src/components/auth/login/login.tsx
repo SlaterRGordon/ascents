@@ -1,3 +1,4 @@
+import '../auth.css';
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -55,14 +56,14 @@ const LoginPage = () => {
 
     return (
         <form onSubmit={handleOnSubmit} className={'flex-center'}>
-            <Paper elevation={6}>
+            <Paper elevation={6} className="authForm">
                 <Box component='div' sx={{ width: '330px', padding: '50px', textAlign: 'left' }}>
                     <Stack spacing={2}>
                         <div>
                             <Typography variant="h4" component="div">
                                 Sign in
                             </Typography>
-                            <Typography sx={{ color: 'var(--color-fadedtext)' }} component="div">
+                            <Typography sx={{ color: 'var(--color-text)' }} component="div">
                                 or <Link href='' onClick={() => navigate('/register')} underline="none">create an account</Link>
                             </Typography>
                         </div>

@@ -1,6 +1,7 @@
 .filterbar {
 	display: flex;
 	justify-content: space-between;
+	padding: 0px !important;
 }
 
 .filter-item {
