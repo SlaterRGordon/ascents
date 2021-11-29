@@ -3,7 +3,7 @@ import './list.css'
 import Filter from './filter/filter';
 import ListItem from './listItem/listItem';
 
-import { Grid } from '@mui/material';
+import { Grid, CircularProgress } from '@mui/material';
 
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
@@ -127,6 +127,11 @@ const List = (props: ListProps) => {
 				return <Grid key={climb._id} item xs={12} sm={12} lg={12} xl={6}><ListItem item={climb} openItem={(e) => openItem(e, climb._id)} /></Grid>;
 			})}
 		</Grid>
+		{loading ? 
+			<div className="loaderContainer"><CircularProgress className="loader"></CircularProgress></div>
+		:	
+			<></>
+		}
 		</>
 	);
 }

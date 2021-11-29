@@ -6,6 +6,7 @@
 
 .listContainer {
 	height: 100%;
+	position: relative;
 }
 .detailContainer {
 	height: 100%;

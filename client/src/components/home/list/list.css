@@ -9,3 +9,19 @@
 .list::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
+
+.loaderContainer {
+	position: absolute;
+	height: 100%;
+	width: calc(100% - 16px);
+	top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	background-color: var(--color-fadedtext);
+	opacity: 0.7;
+}
+
+.loader {
+	opacity: 1;
+}
