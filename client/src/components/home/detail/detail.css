@@ -25,3 +25,7 @@
 .headerIcon {
 	color: var(--color-text) !important;
 }
+
+.ascents {
+	height: 50%;
+}

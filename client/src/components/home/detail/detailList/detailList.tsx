@@ -36,7 +36,7 @@ const DetailList = (props: DetailListProps) => {
 	// Hook on new climbId
 	useEffect(() => {
 		setLoading(false);
-		setInitialLoad(false);
+		setInitialLoad(true);
 	}, [climbId]);
 
 	// Hook on initial load
