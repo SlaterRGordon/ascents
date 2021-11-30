@@ -6,13 +6,17 @@ const ascentReducer = (state = { isLoading: true, ascents: [] }, action) => {
             return { ...state, isLoading: true };
         case 'END_LOADING':
             return { ...state, isLoading: false };
-        case actionType.FETCH_ASCENTS:
-            return {
-                ...state,
-                ascents: action.payload.data,
-                currentPage: action.payload.currentPage,
-                numberOfPages: action.payload.numberOfPages,
-            };
+		case actionType.FETCH_ASCENTS:
+			return {
+				...state,
+				ascents: [...state.ascents.concat(action.payload.data)],
+				hasMore: action.payload.hasMore
+			};
+		case actionType.CLEAR_ASCENTS:
+			return {
+				...state,
+				ascents: [],
+			};
         case actionType.CREATE_ASCENT:
             return { ...state, ascents: [...state.ascents, action.payload] };
         case actionType.DELETE_ASCENT:

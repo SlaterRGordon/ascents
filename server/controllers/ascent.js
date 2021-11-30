@@ -1,23 +1,19 @@
 import Ascent from "../models/ascent.js";
 
 export const getAscents = async (req, res) => {
-    const { page } = req.query;
-
     try {
-        const limit = 12;
-        const startIndex = (Number(page) - 1) * limit;
-        
-        const total = await Ascent.countDocuments({});
-        const ascents = await Ascent.find().sort({_id: -1}).limit(limit).skip(startIndex);
-        if(!ascents) {
-            ascents = [];
-        }
+		let query = {
+			"climbId": req.query.climbId
+		};
 
-        res.json({ data: ascents, currentPage: Number(page), numberOfPages: Math.ceil(total / limit) });
-    } catch (error) {
-        console.log(error);
-        res.status(404).json({ message: error.message });
-    }
+        const ascents = await Ascent.find(query).sort({_id: -1}).limit(Number(req.query.limit)).skip(Number(req.query.skip));
+		const total = await Ascent.find(query).count();	
+		
+		res.json({ data: ascents, hasMore: total >= Number(req.query.limit) + Number(req.query.skip) });
+	} catch (error) {
+		console.log(error);
+		res.status(404).json({ message: error.message });
+	}
 };
 
 export const getAscentsByUser = async (req, res) => {
@@ -42,8 +38,8 @@ export const getAscentsByUser = async (req, res) => {
 };
 
 export const createAscent = async (req, res) => {
-    const ascent = req.body;
-    const newAscent = new Ascent({ ...climb, creator: req.userId })
+    const { ascent } = req.body;
+    const newAscent = new Ascent({ ...ascent, creator: req.userId })
 
     try {
         await newAscent.save();

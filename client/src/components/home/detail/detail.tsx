@@ -8,6 +8,8 @@ import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 
 import { getClimb } from '../../../flux/actions/climbs';
 
+import DetailList from './detailList/detailList';
+
 
 interface DetailProps {
 	id: string;
@@ -51,7 +53,7 @@ const Detail = (props: DetailProps) => {
 						<div className="detailBody">
 							<div>Detail body content here...</div>
 							<div className="ascents">
-								
+								<DetailList climbId={climb._id} />
 							</div>
 						</div>
 					</div>

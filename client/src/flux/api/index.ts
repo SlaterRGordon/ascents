@@ -19,7 +19,11 @@ export const fetchClimbs = (query) => {
 export const createClimb = (newClimb) => API.post('/climbs', newClimb);
 export const deleteClimb = (id) => API.delete(`/climbs/${id}`);
 
-export const fetchAscents = (page) => API.get(`/ascents?page=${page}`);
+export const fetchAscents = (query) => {
+	const params = new URLSearchParams()
+	Object.keys(query).map((param) => params.set(param, query[param]));
+	return API.get(`/ascents?${params.toString()}`);
+};
 export const fetchAscentsByUser = ({page, userId}) => API.get(`/ascents?page=${page}&userId=${userId}`);
 export const createAscent = (newAscent) => API.post('/ascents', newAscent);
 export const deleteAscent = (id) => API.delete(`/ascents/${id}`);

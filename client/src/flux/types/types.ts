@@ -18,6 +18,7 @@ export const FETCH_CLIMB = 'FETCH_CLIMB';
 export const CREATE_ASCENT = 'CREATE_ASCENT';
 export const DELETE_ASCENT = 'DELETE_ASCENT';
 export const FETCH_ASCENTS = 'FETCH_ASCENTS';
+export const CLEAR_ASCENTS = 'CLEAR_ASCENTS';
 export const FETCH_ASCENT = 'FETCH_ASCENT';
 
 export const CREATE_GRADE = 'CREATE_GRADE';

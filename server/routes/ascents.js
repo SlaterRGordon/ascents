@@ -6,7 +6,7 @@ import { getAscents, getAscentsByUser, createAscent, deleteAscent } from "../con
 
 router.get("/", getAscents);
 router.get('/', getAscentsByUser);
-router.post('/', auth, createAscent);
+router.post('/', createAscent);
 router.delete('/:id', auth, deleteAscent);
 
 export default router;

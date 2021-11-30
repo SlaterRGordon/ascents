@@ -16,6 +16,7 @@ app.use(cors());
 
 app.use("/auth", authRouter);
 app.use("/climbs", climbRouter);
+app.use("/ascents", ascentRouter);
 app.use("/grades", gradeRouter);
 
 const { MONGO_URI, MONGO_DB_NAME, PORT } = config;
