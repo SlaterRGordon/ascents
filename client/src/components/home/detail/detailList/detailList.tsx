@@ -82,12 +82,12 @@ const DetailList = (props: DetailListProps) => {
 			{ascents?.map((ascent) => {
 				return <Grid key={ascent._id} item xs={12} sm={12} lg={12} xl={6}><DetailListItem item={ascent} /></Grid>;
 			})}
+			{hasMore ? 
+				<CircularProgress className="loader"></CircularProgress>
+			:	
+				<></>
+			}
 		</Grid>
-		{loading ? 
-			<div className="loaderContainer"><CircularProgress className="loader"></CircularProgress></div>
-		:	
-			<></>
-		}
 		</>
 	);
 }

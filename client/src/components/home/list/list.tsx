@@ -126,12 +126,12 @@ const List = (props: ListProps) => {
 			{climbs?.map((climb) => {
 				return <Grid key={climb._id} item xs={12} sm={12} lg={12} xl={6}><ListItem item={climb} openItem={(e) => openItem(e, climb._id)} /></Grid>;
 			})}
+			{hasMore ? 
+				<CircularProgress className="loader"></CircularProgress>
+			:	
+				<></>
+			}
 		</Grid>
-		{loading ? 
-			<div className="loaderContainer"><CircularProgress className="loader"></CircularProgress></div>
-		:	
-			<></>
-		}
 		</>
 	);
 }

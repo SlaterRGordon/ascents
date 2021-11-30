@@ -11,3 +11,20 @@
 .detailContainer {
 	height: 100%;
 }
+
+.loaderContainer {
+	position: absolute;
+	height: 100%;
+	width: calc(100% - 16px);
+	top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	background-color: var(--color-fadedtext);
+	opacity: 0.1;
+}
+
+.loader {
+	margin: 0px auto;
+	padding: 12px;
+}
