@@ -6,7 +6,8 @@ import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 
 import { clearAscents, getAscents } from '../../../../flux/actions/ascents';
-import { clearClimbs } from '../../../../flux/actions/climbs';
+
+import DetailListItem from './detailListItem/detailListItem';
 
 function isBottom(ref: React.RefObject<HTMLDivElement>) {
 	if (!ref.current) {
@@ -79,7 +80,7 @@ const DetailList = (props: DetailListProps) => {
 		<>
 		<Grid container spacing={0} className="detailList" ref={contentRef} id="detailList">
 			{ascents?.map((ascent) => {
-				return <Grid key={ascent._id} item xs={12} sm={12} lg={12} xl={6}>{ascent.description}</Grid>;
+				return <Grid key={ascent._id} item xs={12} sm={12} lg={12} xl={6}><DetailListItem item={ascent} /></Grid>;
 			})}
 		</Grid>
 		{loading ? 

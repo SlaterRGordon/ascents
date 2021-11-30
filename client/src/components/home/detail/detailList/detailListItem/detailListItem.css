@@ -1,0 +1,27 @@
+.detailItem {
+	display: flex;
+	flex-direction: column;
+	height: 190px;
+	margin: 4px;
+	padding: 8px;
+	border-radius: 0.5rem;
+	background-color: var(--color-dark);
+}
+.detailItem:hover {
+	cursor: pointer;
+	background-color: var(--color-darker);
+}
+
+.itemHeader {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+}
+
+.itemBody {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	padding: 8px;
+}
